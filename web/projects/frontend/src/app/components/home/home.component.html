@@ -1,0 +1,20 @@
+<div fxLayout="column" fxLayout.gt-sm="row">
+  <div fxFlex="20"></div>
+  <div fxFlex="60">
+    <mat-grid-list cols="3" gutterSize="10">
+      <mat-grid-tile *ngFor="let tile of tiles" [colspan]="tile.cols" [rowspan]="tile.rows" [style.background]="tile.color">
+
+        <div class="content">
+          <div class="content-overlay"></div>
+          <img class="content-image" [src]="tile.image">
+          <div class="content-details fadeIn-left">
+            <h2>title</h2>
+            <p>short description</p>
+          </div>
+        </div>
+
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+  <div fxFlex="20"></div>
+</div>

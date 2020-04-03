@@ -1,0 +1,80 @@
+/**
+ * @license
+ * Copyright Dutch Cask. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that
+ * can be found in the LICENSE file at https://dutch-cask.nl/license
+ */
+
+.sidenav-container {
+  flex: 1;
+}
+
+.container {
+  height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+#content {
+  flex: 1;
+  padding: 0.625rem;
+  margin-top: 6px;
+}
+
+.page-wrap {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 64px);
+}
+
+.no-padding-mobile {
+  padding: 0 !important;
+  margin-top: 0 !important;
+}
+
+.is-mobile {
+  .toolbar {
+    position: fixed;
+    z-index: 2;
+  }
+  .sidenav-container {
+    flex: 1 0 auto;
+  }
+}
+
+.skip-link {
+  top: -20px;
+  position: absolute;
+  &:focus {
+    top: 0;
+  }
+}
+
+.search-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  min-width: 150px;
+  height: 100%;
+}
+
+.header-section {
+  text-align: center;
+  // padding: 25px;
+}
+
+.header-headline h2 {
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 28px;
+  margin: 15px 0 25px;
+  text-align: center;
+}

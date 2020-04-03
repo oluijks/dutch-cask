@@ -1,0 +1,1 @@
+certbot --server https://acme-v02.api.letsencrypt.org/directory -d bristol3.pki.enigmabridge.com.dutch-cask.nl --manual --preferred-challenges dns-01 certonly -d "dutch-cask.nl" -d "*.dutch-cask.nl"

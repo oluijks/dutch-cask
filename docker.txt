@@ -1,0 +1,11 @@
+clear && docker images && docker container ls --all && docker volume ls
+
+docker volume rm $(docker volume ls -qf dangling=true)
+
+npm run docker:up-build
+
+docker exec -t -i dutch-cask-api /bin/sh 
+
+docker volume create --name=dc_dev  
+
+docker volume inspect dc_dev 

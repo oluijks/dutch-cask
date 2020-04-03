@@ -1,0 +1,24 @@
+# Run docker-compose build
+# Run docker-compose up
+# Run docker-compose down
+version: "3"
+services:
+  cdn:
+    container_name: dutch-cask-cdn
+    image: dutch-cask/cdn:1.0.0
+    build:
+      context: .
+      dockerfile: .docker/cdn.development.dockerfile
+    volumes:
+      - ./:/var/www/dutch-cask-cdn
+      - /etc/letsencrypt:/etc/letsencrypt
+    ports:
+      - "3000:3000"
+    networks:
+      - cdn-network
+    environment:
+      - NODE_ENV=prod
+
+networks:
+  cdn-network:
+    driver: bridge

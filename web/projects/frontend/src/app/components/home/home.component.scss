@@ -1,0 +1,85 @@
+/**
+ * @license
+ * Copyright Dutch Cask. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that
+ * can be found in the LICENSE file at https://dutch-cask.nl/license
+ */
+
+.content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  overflow: hidden;
+  .content-overlay {
+    background: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    opacity: 0;
+    transition: all 0.5s ease-in-out 0s;
+  }
+  &:hover .content-overlay {
+    opacity: 1;
+  }
+}
+
+.content-image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.content-details {
+  position: absolute;
+  text-align: center;
+  padding-left: 1em;
+  padding-right: 1em;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: all 0.5s ease-in-out 0s;
+}
+
+.content:hover .content-details {
+  top: 50%;
+  left: 50%;
+  opacity: 1;
+}
+
+.content-details {
+  h2 {
+    color: #fff;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.1em;
+    text-transform: uppercase;
+  }
+  p {
+    color: #fff;
+    font-size: 1em;
+  }
+}
+
+.fadeIn-bottom {
+  top: 80%;
+}
+
+.fadeIn-top {
+  top: 20%;
+}
+
+.fadeIn-left {
+  left: 20%;
+}
+
+.fadeIn-right {
+  left: 80%;
+}

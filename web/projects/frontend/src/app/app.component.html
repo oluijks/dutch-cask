@@ -1,0 +1,85 @@
+<div class="container" [class.is-mobile]="isScreenSmall">
+  <a href="#content" class="skip-link">Skip to main content</a>
+
+  <mat-toolbar [color]="toolbarColor" class="toolbar">
+    <mat-toolbar-row class="mat-elevation-z6">
+      <button mat-button [routerLink]="['/']" *ngIf="isScreenSmall">{{ appTitle }}</button>
+      <ng-container *ngIf="!isScreenSmall">
+        <div fxLayoutAlign="start stretch" fxLayoutGap="8px">
+          <button mat-button [routerLink]="['/']">{{ appTitle }}</button>
+          <mat-divider [vertical]="true"></mat-divider>
+          <button aria-label="Home" mat-button [routerLink]="['/']">
+            <mat-icon>home</mat-icon>
+          </button>
+          <mat-divider [vertical]="true"></mat-divider>
+          <dcwa-category-menu></dcwa-category-menu>
+          <mat-divider [vertical]="true"></mat-divider>
+          <button mat-button [routerLink]="['/products']">PRODUCTS</button>
+          <mat-divider [vertical]="true"></mat-divider>
+          <dcwa-checkout-button *ngIf="(cartTotal$ | async) > 0" [total]="cartTotal$ | async"></dcwa-checkout-button>
+        </div>
+      </ng-container>
+      <mat-divider [vertical]="true"></mat-divider>
+      <mat-menu #appMenu="matMenu">
+        <button aria-label="About" mat-menu-item routerLink="/about">About Us</button>
+        <mat-divider></mat-divider>
+        <button aria-label="Help" mat-menu-item>Help</button>
+      </mat-menu>
+      <span style="flex: 1 1 auto;"></span>
+      <mat-divider [vertical]="true"></mat-divider>
+      <button aria-label="Menu" mat-icon-button [matMenuTriggerFor]="appMenu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </mat-toolbar-row>
+    <mat-toolbar-row *ngIf="isScreenSmall" style="padding: 0 8px;" fxLayout="row">
+      <div fxFlex="56px">
+        <button aria-label="menu" mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
+      <div fxFlex fxLayout="row" fxLayoutAlign="center center">
+        <button fxFlex="50" mat-button [routerLink]="['/']" (click)="sidenav.close()">HOME</button>
+        <button fxFlex="50" mat-button [routerLink]="['/products']" (click)="sidenav.close()">PRODUCTS</button>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="sidenav-container" [style.marginTop.px]="isScreenSmall ? 112: 0">
+    <mat-sidenav #sidenav [opened]="!isScreenSmall" [mode]="isScreenSmall ? 'over' : 'side'" [fixedInViewport]="isScreenSmall"
+      fixedTopGap="112">
+      <mat-nav-list *ngIf="isScreenSmall">
+        <a *ngFor="let nav of navList" (click)="sidenav.close()" mat-list-item [routerLink]="nav.link">
+          <mat-icon>{{ nav.icon }}</mat-icon>
+        </a>
+      </mat-nav-list>
+      <mat-nav-list *ngIf="!isScreenSmall">
+        <a *ngFor="let nav of navList" mat-list-item [routerLink]="nav.link">
+          <mat-icon>{{ nav.icon }}</mat-icon>
+          <!-- <mat-icon *ngIf="nav.icon === 'shopping_cart'" matBadge="8" matBadgeColor="accent">{{ nav.icon }}</mat-icon> -->
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <div class="page-wrap">
+        <!-- <pre style="text-align: center;">State: {{ mqState }}</pre> -->
+        <dcwa-demo-message [showMessage]="showDemoMessage"></dcwa-demo-message>
+        <!-- <pre>{{ (isPushAllowed$ | async) | json }}</pre> -->
+        <!--
+        <pre style="text-align: center;">isScreenSmall: {{ isScreenSmall }}</pre>
+        <pre style="text-align: center;">noPagePadding: {{noPagePadding}}</pre> -->
+        <dcwa-page-header></dcwa-page-header>
+        <!-- <pre>{{ (customer$ | async) | json }}</pre> -->
+        <!-- <div *ngIf="(isPushEnabled$ | async)">
+          <button aria-label="Subscribe" mat-raised-button (click)="subscribe()" [disabled]="(isSubscribed$ | async)">Subscribe</button>
+          <button aria-label="Unsubscribe" mat-raised-button (click)="unsubscribe()" [disabled]="!(isSubscribed$ | async)">Unsubscribe</button>
+        </div> -->
+        <div id="content">
+          <router-outlet></router-outlet>
+        </div>
+        <dcwa-footer [applicationVersion]="appVersion" [angularVersion]="angVersion"></dcwa-footer>
+      </div>
+    </mat-sidenav-content>
+
+  </mat-sidenav-container>
+</div>

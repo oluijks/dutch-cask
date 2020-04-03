@@ -1,0 +1,87 @@
+<div fxLayout="row" fxLayoutGap="20px">
+  <div fxFlex="70">
+    <div fxLayout="row" fxLayoutAlign="start center" flex>
+      <mat-horizontal-stepper #stepper fxFlex="100" [linear]="true">
+
+        <mat-step label="Billing">
+          <dcwa-billing></dcwa-billing>
+          <div>
+            <button mat-raised-button matStepperNext color="primary">NEXT</button>
+          </div>
+        </mat-step>
+
+        <mat-step label="Shipping">
+          <dcwa-shipping></dcwa-shipping>
+          <div>
+            <button mat-raised-button matStepperPrevious color="primary">BACK</button>&nbsp;
+            <button mat-raised-button matStepperNext color="primary">NEXT</button>
+          </div>
+        </mat-step>
+
+        <mat-step label="Payment" [completed]="false">
+          <dcwa-payment></dcwa-payment>
+          <div>
+            <button mat-raised-button matStepperPrevious color="primary">BACK</button>&nbsp;
+            <button mat-raised-button matStepperNext color="primary">NEXT</button>
+          </div>
+        </mat-step>
+
+        <mat-step label="Order Review">
+          <dcwa-order-review></dcwa-order-review>
+          <div>
+            <button mat-raised-button matStepperPrevious color="primary">BACK</button>&nbsp;
+            <button mat-raised-button (click)="stepper.reset()" color="warn">RESET</button>
+          </div>
+        </mat-step>
+
+      </mat-horizontal-stepper>
+    </div>
+  </div>
+
+  <div fxFlex="30">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title style="font-size: 21px; font-weight: 400; margin-bottom: 23px;">
+          Your Checkout Progress
+        </mat-card-title>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item>
+            <h2 matLine>
+              Billing Address
+            </h2>
+            <p matLine>
+              <i>Olaf A.A. Luijks</i>
+            </p>
+            <p matLine>
+              <i>Dr. H.E. van Gelderlaan 125</i>
+            </p>
+            <p matLine>
+              <i>2552 KJ, 's Gravenhage, The Netherlands</i>
+            </p>
+          </mat-list-item>
+        </mat-list>
+
+        <mat-list>
+          <mat-list-item>
+            <h2 matLine>
+              Shippping Address
+            </h2>
+            <p matLine>
+              <i>Olaf A.A. Luijks</i>
+            </p>
+            <p matLine>
+              <i>Dr. H.E. van Gelderlaan 125</i>
+            </p>
+            <p matLine>
+              <i>2552 KJ, 's Gravenhage, The Netherlands</i>
+            </p>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+</div>

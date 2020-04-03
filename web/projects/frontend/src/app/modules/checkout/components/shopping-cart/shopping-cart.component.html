@@ -1,0 +1,92 @@
+<div fxLayout="column" fxLayout.gt-md="row" fxLayoutGap="20px" *ngIf="(total$ | async) > 0; else emptyCard">
+  <div fxFlex="65">
+
+    <dcwa-cart-toolbar (clear)="onClearCart($event)"></dcwa-cart-toolbar>
+
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <!-- @todo responsive table or other template for small devices -->
+      <table mat-table [dataSource]="(cart$ | async)" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="image">
+          <th mat-header-cell *matHeaderCellDef width="15%">PRODUCT</th>
+          <td mat-cell *matCellDef="let cart">
+            <img src="{{cart.order_item.main_photo}}" alt="{{cart.order_item.product_name}}" width="90" style="vertical-align: middle; padding: 12px 12px 12px 0;"
+            />
+          </td>
+          <!-- <td mat-footer-cell *matFooterCellDef>&nbsp;</td> -->
+        </ng-container>
+
+        <ng-container matColumnDef="product_name">
+          <th mat-header-cell *matHeaderCellDef width="40%">&nbsp;</th>
+          <td mat-cell *matCellDef="let cart">
+            <span style="font-weight: 500;">{{cart.order_item.product_name}}</span>
+            <p class="mat-caption">SKU: {{cart.id}}</p>
+          </td>
+          <!-- <td mat-footer-cell *matFooterCellDef style="text-align: right;">&nbsp;</td> -->
+        </ng-container>
+
+        <ng-container matColumnDef="prices">
+          <th mat-header-cell *matHeaderCellDef width="15%">SUBTOTAL</th>
+          <td mat-cell *matCellDef="let cart">
+            {{((cart.order_item.prices.price / 100) * cart.order_item.qty) | currency}}
+          </td>
+          <!-- <td mat-footer-cell *matFooterCellDef>{{amount$ | currency}}</td> -->
+        </ng-container>
+
+        <ng-container matColumnDef="edit">
+          <th mat-header-cell *matHeaderCellDef width="15%">&nbsp;</th>
+          <td mat-cell *matCellDef="let cart">
+            <button mat-icon-button>
+              <mat-icon aria-label="Remove item from cart" (tap)="removeCartItem(cart.id)">
+                delete
+              </mat-icon>
+            </button>
+          </td>
+          <!-- <td mat-footer-cell *matFooterCellDef style="text-align: right;">&nbsp;</td> -->
+        </ng-container>
+
+        <ng-container matColumnDef="qty">
+          <th mat-header-cell *matHeaderCellDef width="15%">QTY</th>
+          <td mat-cell *matCellDef="let cart">
+            <mat-form-field style="width: 88px;">
+              <input matInput type="number" value="{{cart.order_item.qty}}" min="1" max="999" (change)="updateQuantity(cart, $event.target.valueAsNumber)">
+            </mat-form-field>
+          </td>
+          <!-- <td mat-footer-cell *matFooterCellDef style="text-align: right;">
+            Total&nbsp;&nbsp;
+          </td> -->
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <!-- <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr> -->
+      </table>
+
+    </div>
+  </div>
+  <div fxFlex="35">
+
+    <div fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="start stretch">
+      <div>
+        <dcwa-discount-code></dcwa-discount-code>
+      </div>
+      <div>
+        <dcwa-estimate-shipping-tax></dcwa-estimate-shipping-tax>
+      </div>
+      <div>
+        <dcwa-price-box [amount]="amount$"></dcwa-price-box>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<ng-template #emptyCard>
+  <h1>SHOPPING CART IS EMPTY</h1>
+  <p>You have no items in your shopping cart.</p>
+  <button mat-raised-button routerLink="/home" class="continue-shopping-button">
+    <mat-icon>shopping_cart</mat-icon>
+    <span>&nbsp;CONTINUE SHOPPING</span>
+  </button>
+</ng-template>

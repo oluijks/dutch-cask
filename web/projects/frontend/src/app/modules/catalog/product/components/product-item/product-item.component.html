@@ -1,0 +1,42 @@
+<mat-card style="margin-bottom: 1.3%" (mouseleave)="isActive = !isActive" (mouseenter)="isActive = !isActive" [class.mat-elevation-z2]="!isActive"
+  [class.mat-elevation-z8]="isActive">
+  <mat-card-header>
+    <mat-card-title>{{ product.attributes.name }}</mat-card-title>
+    <mat-card-subtitle>
+      {{ product.attributes.description.short }}
+    </mat-card-subtitle>
+  </mat-card-header>
+  <ng-container *dcwaArticleCarousel="let source from product.attributes.photos.additional; let ctrl = controls">
+    <div *ngIf="product.attributes.photos.additional.length > 0; else showOnlyMainPhoto;">
+      <picture (click)="ctrl.next()" style="cursor: pointer;">
+        <source [srcset]="ciu + source" type="image/webp">
+        <source [srcset]="ciu + source" type="image/jpg">
+        <img mat-card-image [src]="ciu + source" [alt]="product.attributes.name" />
+      </picture>
+      <div style="position: relative; top: -48px; user-select: none;" fxLayout="row">
+        <mat-icon style="cursor: pointer;" (click)="ctrl.prev()">chevron_left</mat-icon>
+        <small>photo {{ ctrl.index() }} of {{ product.attributes.photos.additional.length }}</small>
+        <mat-icon style="cursor: pointer;" (click)="ctrl.next()">chevron_right</mat-icon>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #showOnlyMainPhoto>
+    <picture>
+      <source [srcset]="ciu + product.attributes.photos.main" type="image/webp">
+      <source [srcset]="ciu + product.attributes.photos.main" type="image/jpeg">
+      <img mat-card-image [src]="ciu + product.attributes.photos.main" [alt]="product.attributes.name" />
+    </picture>
+  </ng-template>
+  <mat-card-content [ngStyle]="{'margin-top': hasAdditionalPhotos(product) ? '-37px' : '' }">
+    <h2 class="mat-h2">{{ (product.attributes.prices.price / 100) | currency: product.attributes.prices.currency_code:'symbol-narrow' }}</h2>
+    <p>{{ product.attributes.description.long }}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (tap)="addToShoppingCart(product)">
+      <mat-icon aria-label="Add to shopping cart">add_shopping_cart</mat-icon>
+    </button>
+    <button mat-button>LIKE</button>
+    <button mat-button>SHARE</button>
+  </mat-card-actions>
+  <!-- <mat-card-footer>footer</mat-card-footer> -->
+</mat-card>

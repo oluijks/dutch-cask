@@ -1,0 +1,64 @@
+/**
+ * @license
+ * Copyright Dutch Cask. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that
+ * can be found in the LICENSE file at https://dutch-cask.nl/license
+ */
+
+@import './theme';
+
+// Helps fonts on OSX looks more consistent with other systems
+// Isn't currently in button styles due to performance concerns
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+input {
+  &::-webkit-inner-spin-button {
+    opacity: 1;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  background-color: #212121;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.3);
+  background-color: #212121;
+}
+
+::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.3);
+  background-color: #424242;
+}
+
+// @viewport {
+//   zoom: 1;
+//   width: extend-to-zoom;
+// }
+
+body {
+  margin: 0;
+}
+
+pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  text-align: justify;
+}
+
+.router-outlet {
+  position: relative;
+}
+
+.router-outlet > * {
+  display: block;
+}
+
+.continue-shopping-button {
+  background-color: #388e3c;
+}

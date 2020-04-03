@@ -1,0 +1,18 @@
+<div>
+  <span *ngFor="let item of navItems">
+    <!-- Handle branch node buttons here -->
+    <span *ngIf="item.children && item.children.length > 0">
+      <button mat-button [matMenuTriggerFor]="menu.childMenu">
+        {{item.displayName}}
+        <mat-icon>expand_more</mat-icon>
+      </button>
+      <dcwa-category-menu-item #menu [items]="item.children"></dcwa-category-menu-item>
+    </span>
+    <!-- Leaf node buttons here -->
+    <span *ngIf="!item.children || item.children.length === 0">
+      <button mat-button color="primary" [routerLink]="item.route">
+        {{item.displayName}}
+      </button>
+    </span>
+  </span>
+</div>

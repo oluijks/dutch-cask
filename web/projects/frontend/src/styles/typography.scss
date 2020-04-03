@@ -1,0 +1,16 @@
+/**
+ * @license
+ * Copyright Dutch Cask. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that
+ * can be found in the LICENSE file at https://dutch-cask.nl/license
+ */
+
+@import '~@angular/material/theming';
+
+$dcwa-typography: mat-typography-config(
+  $font-family:
+    'Roboto, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif',
+  $headline: mat-typography-level(32px, 48px, 300),
+  $body-1: mat-typography-level(16px, 24px, 400),
+);

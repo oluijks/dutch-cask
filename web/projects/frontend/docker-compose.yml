@@ -1,0 +1,23 @@
+# Run docker-compose build
+# Run docker-compose up
+# Run docker-compose down
+version: "3"
+services:
+  webapp:
+    container_name: dutch-cask-webapp
+    image: dutch-cask/webapp:1.0.0
+    build:
+      context: .
+      dockerfile: .docker/webapp.development.dockerfile
+    volumes:
+      - ../../dist/frontend:/usr/share/nginx/html
+      - /etc/letsencrypt:/etc/letsencrypt
+    ports:
+      - "80:4200"
+      - "443:4443"
+    networks:
+      - webapp-network
+
+networks:
+  webapp-network:
+    driver: bridge

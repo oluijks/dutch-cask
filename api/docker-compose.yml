@@ -1,0 +1,40 @@
+# Run docker-compose build
+# Run docker-compose up
+# Run docker-compose down
+version: "3"
+services:
+  api:
+    container_name: dutch-cask-api
+    image: dutch-cask/api:1.0.0
+    build:
+      context: .
+      dockerfile: .docker/api.development.dockerfile
+    volumes:
+      - ./:/var/www/dutch-cask-api
+      - /etc/letsencrypt:/etc/letsencrypt
+    ports:
+      - "3333:3333"
+      - "8443:8443"
+    networks:
+      - api-network
+    environment:
+      - NODE_ENV=prod
+    depends_on:
+      - "mongo"
+
+  mongo:
+    container_name: dutch-cask-mongo
+    image: "mongo"
+    volumes:
+      - prod:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - api-network
+
+volumes:
+  prod:
+
+networks:
+  api-network:
+    # driver: bridge

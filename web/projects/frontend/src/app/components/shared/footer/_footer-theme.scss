@@ -1,0 +1,26 @@
+/**
+ * @license
+ * Copyright Dutch Cask. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that
+ * can be found in the LICENSE file at https://dutch-cask.nl/license
+ */
+
+@mixin footer-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  footer {
+    padding: 12px;
+    margin-top: 15px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    a {
+      color: mat-color($primary, default-contrast);
+    }
+  }
+}

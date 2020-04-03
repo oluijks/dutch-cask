@@ -1,0 +1,39 @@
+/**
+ * @license
+ * Copyright Dutch Cask. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that
+ * can be found in the LICENSE file at https://dutch-cask.nl/license
+ */
+
+@import '~@angular/material/theming';
+@import './typography';
+@import '../app/components/shared/footer/footer-theme';
+
+@include mat-core($dcwa-typography);
+
+$dcwa-app-primary: mat-palette($mat-indigo);
+$dcwa-app-accent: mat-palette($mat-pink, A200, A100, A400);
+$dcwa-app-warn: mat-palette($mat-red);
+$dcwa-app-theme: mat-dark-theme(
+  $dcwa-app-primary,
+  $dcwa-app-accent,
+  $dcwa-app-warn
+);
+
+@include angular-material-theme($dcwa-app-theme);
+
+.color-primary {
+  background-color: #666;
+}
+
+.color-accent {
+  background-color: mat-color($dcwa-app-accent);
+}
+
+footer {
+  background: #212121;
+  color: mat-color($dcwa-app-primary, default-contrast);
+}
+
+@include footer-theme($dcwa-app-theme);

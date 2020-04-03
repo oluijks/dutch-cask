@@ -1,0 +1,18 @@
+/**
+ * @license
+ * Copyright Dutch Cask. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that
+ * can be found in the LICENSE file at https://dutch-cask.nl/license
+ */
+
+[md-button],
+[md-raised-button] {
+  .md-button-wrapper > * {
+    vertical-align: middle;
+  }
+}
+
+#{'/deep/'} .mat-menu-panel {
+  border-radius: 0 !important;
+}
